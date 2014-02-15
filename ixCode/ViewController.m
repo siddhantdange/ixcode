@@ -11,7 +11,10 @@
 @interface ViewController ()<UIAlertViewDelegate, UITextFieldDelegate>
 @property (strong, nonatomic) NSString *tempText;
 @property (strong, nonatomic) UIImageView *errorImage;
+@property (strong, nonatomic) UIImageView *buildImage;
+@property (weak, nonatomic) IBOutlet UIImageView *loadingBar;
 
+@property (weak, nonatomic) IBOutlet UIImageView *errorNavImage;
 
 @end
 
@@ -25,18 +28,30 @@
     av.alertViewStyle = UIAlertViewStylePlainTextInput;
     [av textFieldAtIndex:0].delegate = self;
     [av show];
+    [self.errorNavImage setAlpha:0];
     isMax = true;
     self.errorImage = [[UIImageView alloc]initWithFrame:CGRectMake(357, 63+19*12, 385, 19)];
     [self.errorImage setBackgroundColor:[UIColor redColor]];
     [self.errorImage setAlpha:0.7];
-}
+    self.buildImage = [[UIImageView alloc]initWithFrame:CGRectMake(412, 311, 200, 200)];
+    //self.loadingBar.layer.cornerRadius = self.loadingBar.frame.size.height/2;
 
+    [self.view addSubview:self.buildImage];
+
+}
 - (IBAction)rightSwipe:(UISwipeGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateEnded) {
         [self.textEditorh setFrame:CGRectMake(0, 54, 511, 714)];
         [self.textEditor setFrame:CGRectMake(513, 54, 511, 714)];
     }
 }
+
+- (IBAction)stop:(id)sender {
+    [self.textEditorh setFrame:CGRectMake(0, 54, 511, 714)];
+    [self.textEditor setFrame:CGRectMake(513, 54, 511, 714)];
+    [self.buildImage setAlpha:0.0];
+}
+
 
 
 - (void)didReceiveMemoryWarning
@@ -119,6 +134,8 @@
     return true;
 }
 
+
+
 - (BOOL)lineRequiresSemicolon:(NSString *)line
 {
     NSLog(@"%@",line);
@@ -148,23 +165,73 @@
 
 - (IBAction)compileCode:(id)sender {
     if ([self lineRequiresSemicolon:self.textEditor.text]&&[self isValid:self.textEditor.text]) {
+        [UIView animateWithDuration:1.5f
+                         animations:^{
+                             // temp.alpha=0.0f;
+                             [self.loadingBar setFrame:CGRectMake(291, 26, 439, 14)];
+                             self.loadingBar.layer.cornerRadius = self.loadingBar.frame.size.height/2;
+                             //z[temp setAlpha:0.0];
+                             
+                             
+                         }
+                         completion:^(BOOL finished) {
+                             [self.loadingBar setFrame:CGRectMake(291, 26, 0, 14)];
+                             [self.buildImage setImage:[UIImage imageNamed:@"succeeded"]];
+                             [self.buildImage setAlpha:1.0];
+                             
+                             [UIView animateWithDuration:1.5f
+                                              animations:^{
+                                                  // temp.alpha=0.0f;
+                                                  [self.errorImage removeFromSuperview];
+                                                  
+                                              }
+                                              completion:^(BOOL finished) {
+                                                  [UIView animateWithDuration:1.0f
+                                                                   animations:^{
+                                                                       // temp.alpha=0.0f;
+                                                                       [self.textEditor setFrame:CGRectMake(357, 54, 385, 714)];
+                                                                       [self.textEditorh setFrame:CGRectMake(0, 54, 355, 714)];
+                                                                       //z[temp setAlpha:0.0];
+                                                                   }
+                                                                   completion:^(BOOL finished) {
+                                                                       [self.buildImage setAlpha:0.0];
+                                                                       [self.errorNavImage setAlpha:0];
+                                                                   }];
+                                              }];
+
+                             
+                         }];
         
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.5];
-        [UIView setAnimationDelay:1.0];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+
+
         
-        [self.textEditor setFrame:CGRectMake(357, 54, 385, 714)];
-        [self.textEditorh setFrame:CGRectMake(0, 54, 355, 714)];
-        [self.errorImage removeFromSuperview];
-        [UIView commitAnimations];
     }
     else{
+        [UIView animateWithDuration:1.5f
+                         animations:^{
+                             // temp.alpha=0.0f;
+                             [self.loadingBar setFrame:CGRectMake(291, 26, 439, 14)];
+                             self.loadingBar.layer.cornerRadius = self.loadingBar.frame.size.height/2;
+                             //z[temp setAlpha:0.0];
+                             
+                             
+                         }
+                         completion:^(BOOL finished) {
+                             [self.loadingBar setFrame:CGRectMake(291, 26, 0, 14)];
+                             [self.buildImage setImage:[UIImage imageNamed:@"failed"]];
+                             [self.buildImage setAlpha:1.0];
+                             [self.errorNavImage setAlpha:1];
+                         }];
+        
+        
+        
+
+        
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.5];
         [UIView setAnimationDelay:1.0];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-        
+        [self.buildImage setAlpha:0];
         [self.textEditor setFrame:CGRectMake(0, 54, 1024, 714)];
         
         [UIView commitAnimations];
