@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController{
+    BOOL isMax;
+    
+}
+@property (weak, nonatomic) IBOutlet UITextView *textEditor;
+@property (weak, nonatomic) IBOutlet UITextView *textEditorh;
 
+
+//.m 357 54 385 714
+//.h 0 54 355 714
 @end

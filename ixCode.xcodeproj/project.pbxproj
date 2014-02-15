@@ -20,6 +20,9 @@
 		2580F72418AF058A0042F072 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2580F70618AF058A0042F072 /* UIKit.framework */; };
 		2580F72C18AF058A0042F072 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2580F72A18AF058A0042F072 /* InfoPlist.strings */; };
 		2580F72E18AF058A0042F072 /* ixCodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2580F72D18AF058A0042F072 /* ixCodeTests.m */; };
+		5E2DCD2E18AF50BE00AA47F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E2DCD2D18AF50BE00AA47F7 /* Main.storyboard */; };
+		5E2DCD3018AF532F00AA47F7 /* 5r.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E2DCD2F18AF532F00AA47F7 /* 5r.png */; };
+		5E2DCD3218AF545F00AA47F7 /* asd.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E2DCD3118AF545F00AA47F7 /* asd.png */; };
 		5EFB406A18AF08C5006DA47F /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EFB406918AF08C5006DA47F /* ViewController.xib */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +55,9 @@
 		2580F72918AF058A0042F072 /* ixCodeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ixCodeTests-Info.plist"; sourceTree = "<group>"; };
 		2580F72B18AF058A0042F072 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2580F72D18AF058A0042F072 /* ixCodeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ixCodeTests.m; sourceTree = "<group>"; };
+		5E2DCD2D18AF50BE00AA47F7 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../Main.storyboard; sourceTree = "<group>"; };
+		5E2DCD2F18AF532F00AA47F7 /* 5r.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5r.png; sourceTree = "<group>"; };
+		5E2DCD3118AF545F00AA47F7 /* asd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asd.png; sourceTree = "<group>"; };
 		5EFB406918AF08C5006DA47F /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ViewController.xib; path = ../ViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,6 +123,8 @@
 				2580F71718AF058A0042F072 /* ViewController.h */,
 				2580F71818AF058A0042F072 /* ViewController.m */,
 				5EFB406918AF08C5006DA47F /* ViewController.xib */,
+				5E2DCD3118AF545F00AA47F7 /* asd.png */,
+				5E2DCD2D18AF50BE00AA47F7 /* Main.storyboard */,
 				2580F71A18AF058A0042F072 /* Images.xcassets */,
 				2580F70918AF058A0042F072 /* Supporting Files */,
 			);
@@ -126,6 +134,7 @@
 		2580F70918AF058A0042F072 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5E2DCD2F18AF532F00AA47F7 /* 5r.png */,
 				2580F70A18AF058A0042F072 /* ixCode-Info.plist */,
 				2580F70B18AF058A0042F072 /* InfoPlist.strings */,
 				2580F70E18AF058A0042F072 /* main.m */,
@@ -228,9 +237,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E2DCD3218AF545F00AA47F7 /* asd.png in Resources */,
+				5E2DCD3018AF532F00AA47F7 /* 5r.png in Resources */,
 				2580F71B18AF058A0042F072 /* Images.xcassets in Resources */,
 				5EFB406A18AF08C5006DA47F /* ViewController.xib in Resources */,
 				2580F70D18AF058A0042F072 /* InfoPlist.strings in Resources */,
+				5E2DCD2E18AF50BE00AA47F7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
