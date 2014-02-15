@@ -15,7 +15,8 @@
 @property (strong, nonatomic) UIImageView *buildImage;
 @property (weak, nonatomic) IBOutlet UIImageView *loadingBar;
 
-@property (weak, nonatomic) IBOutlet UITextView *log;
+@property (strong, nonatomic) IBOutlet UITextView *log;
+@property int errorLine;
 @property (weak, nonatomic) IBOutlet UIImageView *errorNavImage;
 
 @end
@@ -36,6 +37,8 @@
     [self.errorImage setBackgroundColor:[UIColor redColor]];
     [self.errorImage setAlpha:0.7];
     self.buildImage = [[UIImageView alloc]initWithFrame:CGRectMake(412, 311, 200, 200)];
+    [self.log setFrame:CGRectMake(768, 0, 742, 238)];
+    
     //self.loadingBar.layer.cornerRadius = self.loadingBar.frame.size.height/2;
 
     [self.view addSubview:self.buildImage];
@@ -52,6 +55,8 @@
     [self.textEditorh setFrame:CGRectMake(0, 54, 511, 714)];
     [self.textEditor setFrame:CGRectMake(513, 54, 511, 714)];
     [self.buildImage setAlpha:0.0];
+    [self.log setFrame:CGRectMake(0, 768, 1024, 153)];
+
 }
 
 
@@ -111,7 +116,7 @@
     string = [string stringByReplacingOccurrencesOfString:self.tempText withString:@""];
     NSLog(@"string = %@",string);
     NSArray *lines = [string componentsSeparatedByString:@"\n"];
-    int i = 0;
+    int i = 11;
     for (NSString *l in lines)
     {
         i++;
@@ -129,7 +134,10 @@
                 [self.textEditor setFrame:CGRectMake(513, 54, 511, 714)];
                 
                 [UIView commitAnimations];
-                [self.errorImage setFrame:CGRectMake(513, 62+14*11 + 14*i, 512, 14)];
+                [self.errorImage setFrame:CGRectMake(513, 62+ 14*i, 512, 14)];
+                if (i>self.errorLine) {
+                    self.errorLine = i;
+                }
                 [self.view addSubview:self.errorImage];
                 return false;
             }
@@ -299,11 +307,15 @@
 
 - (IBAction)compileCode:(id)sender {
     int errorline=[self errorLine:self.textEditor.text];
-    if (errorline!=-1) {
-        UIAlertView *error=[[UIAlertView alloc]initWithTitle:@"Error" message:[NSString stringWithFormat:@"Build Error %d",errorline] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-        [error show];
+    
+    if (errorline>self.errorLine) {
+        self.errorLine = errorline;
     }
-    if ([self lineRequiresSemicolon:self.textEditor.text]&&[self isValid:self.textEditor.text]) {
+    
+    
+    [self.errorImage setFrame:CGRectMake(513, 62+14*(self.errorLine-1), 512, 14)];
+
+    if ([self lineRequiresSemicolon:self.textEditor.text]&&[self isValid:self.textEditor.text]&&errorline==-1) {
         [UIView animateWithDuration:1.5f
                          animations:^{
                              // temp.alpha=0.0f;
@@ -330,6 +342,7 @@
                                                                        // temp.alpha=0.0f;
                                                                        [self.textEditor setFrame:CGRectMake(357, 54, 385, 714)];
                                                                        [self.textEditorh setFrame:CGRectMake(0, 54, 355, 714)];
+                                                                       [self.log setFrame:CGRectMake(0, 615, 1024, 153)];
                                                                        //z[temp setAlpha:0.0];
                                                                    }
                                                                    completion:^(BOOL finished) {
@@ -351,29 +364,19 @@
                              // temp.alpha=0.0f;
                              [self.loadingBar setFrame:CGRectMake(291, 26, 439, 14)];
                              self.loadingBar.layer.cornerRadius = self.loadingBar.frame.size.height/2;
+                             [self.log setFrame:CGRectMake(0, 768, 1024, 153)];
                              //z[temp setAlpha:0.0];
                              
                              
                          }
                          completion:^(BOOL finished) {
+
                              [self.loadingBar setFrame:CGRectMake(291, 26, 0, 14)];
                              [self.buildImage setImage:[UIImage imageNamed:@"notFinish"]];
                              [self.buildImage setAlpha:1.0];
+                             
                              [self.errorNavImage setAlpha:1];
                          }];
-        
-        
-        
-
-        
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.5];
-        [UIView setAnimationDelay:1.0];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-        [self.buildImage setAlpha:0];
-        [self.textEditor setFrame:CGRectMake(0, 54, 1024, 714)];
-        
-        [UIView commitAnimations];
     }
 }
 
