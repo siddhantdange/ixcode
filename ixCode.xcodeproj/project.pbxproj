@@ -32,6 +32,12 @@
 		5ECD8C0A18AFBBDC00DA0CFD /* screen.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ECD8C0918AFBBDC00DA0CFD /* screen.png */; };
 		5ECD8C0C18AFBCC600DA0CFD /* run.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ECD8C0B18AFBCC600DA0CFD /* run.png */; };
 		5ECD8C0E18AFBD2500DA0CFD /* error.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ECD8C0D18AFBD2500DA0CFD /* error.png */; };
+		5ECD8C1018AFE99100DA0CFD /* papa.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ECD8C0F18AFE99100DA0CFD /* papa.png */; };
+		5ECD8C1218AFE99B00DA0CFD /* bootScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ECD8C1118AFE99B00DA0CFD /* bootScreen.png */; };
+		5ECD8C1718AFF00200DA0CFD /* didFinish@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ECD8C1318AFF00200DA0CFD /* didFinish@2x.png */; };
+		5ECD8C1818AFF00200DA0CFD /* didFinish.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ECD8C1418AFF00200DA0CFD /* didFinish.png */; };
+		5ECD8C1918AFF00200DA0CFD /* notFinish.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ECD8C1518AFF00200DA0CFD /* notFinish.png */; };
+		5ECD8C1A18AFF00200DA0CFD /* notFinish@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ECD8C1618AFF00200DA0CFD /* notFinish@2x.png */; };
 		5EFB406A18AF08C5006DA47F /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EFB406918AF08C5006DA47F /* ViewController.xib */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +82,12 @@
 		5ECD8C0918AFBBDC00DA0CFD /* screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen.png; sourceTree = "<group>"; };
 		5ECD8C0B18AFBCC600DA0CFD /* run.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = run.png; sourceTree = "<group>"; };
 		5ECD8C0D18AFBD2500DA0CFD /* error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = error.png; sourceTree = "<group>"; };
+		5ECD8C0F18AFE99100DA0CFD /* papa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = papa.png; sourceTree = "<group>"; };
+		5ECD8C1118AFE99B00DA0CFD /* bootScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bootScreen.png; sourceTree = "<group>"; };
+		5ECD8C1318AFF00200DA0CFD /* didFinish@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "didFinish@2x.png"; sourceTree = "<group>"; };
+		5ECD8C1418AFF00200DA0CFD /* didFinish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = didFinish.png; sourceTree = "<group>"; };
+		5ECD8C1518AFF00200DA0CFD /* notFinish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notFinish.png; sourceTree = "<group>"; };
+		5ECD8C1618AFF00200DA0CFD /* notFinish@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notFinish@2x.png"; sourceTree = "<group>"; };
 		5EFB406918AF08C5006DA47F /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ViewController.xib; path = ../ViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -155,9 +167,15 @@
 			children = (
 				5ECD8C0318AFB35400DA0CFD /* stop.png */,
 				5ECD8C0B18AFBCC600DA0CFD /* run.png */,
+				5ECD8C1318AFF00200DA0CFD /* didFinish@2x.png */,
+				5ECD8C1418AFF00200DA0CFD /* didFinish.png */,
+				5ECD8C1518AFF00200DA0CFD /* notFinish.png */,
+				5ECD8C1618AFF00200DA0CFD /* notFinish@2x.png */,
 				5ECD8C0518AFB35A00DA0CFD /* play.png */,
 				5EB7FF5518AFAA5F000325DA /* failed.png */,
 				5ECD8C0718AFB51A00DA0CFD /* loading.png */,
+				5ECD8C0F18AFE99100DA0CFD /* papa.png */,
+				5ECD8C1118AFE99B00DA0CFD /* bootScreen.png */,
 				5ECD8C0D18AFBD2500DA0CFD /* error.png */,
 				5EB7FF5318AFAA59000325DA /* succeeded.png */,
 				5ECD8C0118AFB2C900DA0CFD /* top.png */,
@@ -264,6 +282,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5ECD8C1218AFE99B00DA0CFD /* bootScreen.png in Resources */,
+				5ECD8C1718AFF00200DA0CFD /* didFinish@2x.png in Resources */,
+				5ECD8C1818AFF00200DA0CFD /* didFinish.png in Resources */,
 				5ECD8C0818AFB51A00DA0CFD /* loading.png in Resources */,
 				5E2DCD3218AF545F00AA47F7 /* asd.png in Resources */,
 				5ECD8C0418AFB35400DA0CFD /* stop.png in Resources */,
@@ -271,12 +292,15 @@
 				5EB7FF5618AFAA5F000325DA /* failed.png in Resources */,
 				5ECD8C0C18AFBCC600DA0CFD /* run.png in Resources */,
 				2580F71B18AF058A0042F072 /* Images.xcassets in Resources */,
+				5ECD8C1918AFF00200DA0CFD /* notFinish.png in Resources */,
 				5EB7FF5418AFAA59000325DA /* succeeded.png in Resources */,
 				5ECD8C0A18AFBBDC00DA0CFD /* screen.png in Resources */,
 				5EFB406A18AF08C5006DA47F /* ViewController.xib in Resources */,
+				5ECD8C1A18AFF00200DA0CFD /* notFinish@2x.png in Resources */,
 				5ECD8C0618AFB35A00DA0CFD /* play.png in Resources */,
 				5ECD8C0E18AFBD2500DA0CFD /* error.png in Resources */,
 				5ECD8C0218AFB2C900DA0CFD /* top.png in Resources */,
+				5ECD8C1018AFE99100DA0CFD /* papa.png in Resources */,
 				2580F70D18AF058A0042F072 /* InfoPlist.strings in Resources */,
 				5E2DCD2E18AF50BE00AA47F7 /* Main.storyboard in Resources */,
 			);

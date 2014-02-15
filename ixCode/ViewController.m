@@ -14,6 +14,7 @@
 @property (strong, nonatomic) UIImageView *buildImage;
 @property (weak, nonatomic) IBOutlet UIImageView *loadingBar;
 
+@property (weak, nonatomic) IBOutlet UITextView *log;
 @property (weak, nonatomic) IBOutlet UIImageView *errorNavImage;
 
 @end
@@ -176,7 +177,7 @@
                          }
                          completion:^(BOOL finished) {
                              [self.loadingBar setFrame:CGRectMake(291, 26, 0, 14)];
-                             [self.buildImage setImage:[UIImage imageNamed:@"succeeded"]];
+                             [self.buildImage setImage:[UIImage imageNamed:@"didFinish"]];
                              [self.buildImage setAlpha:1.0];
                              
                              [UIView animateWithDuration:1.5f
@@ -218,7 +219,7 @@
                          }
                          completion:^(BOOL finished) {
                              [self.loadingBar setFrame:CGRectMake(291, 26, 0, 14)];
-                             [self.buildImage setImage:[UIImage imageNamed:@"failed"]];
+                             [self.buildImage setImage:[UIImage imageNamed:@"notFinish"]];
                              [self.buildImage setAlpha:1.0];
                              [self.errorNavImage setAlpha:1];
                          }];

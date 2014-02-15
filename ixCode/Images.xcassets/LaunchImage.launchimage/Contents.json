@@ -12,6 +12,7 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
+      "filename" : "papa.png",
       "scale" : "1x"
     },
     {
@@ -26,6 +27,7 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
+      "filename" : "bootScreen.png",
       "scale" : "2x"
     }
   ],
