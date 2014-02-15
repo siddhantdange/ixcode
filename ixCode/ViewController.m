@@ -141,6 +141,78 @@
 
 
 
+-(int)errorLine:(NSString *)input{
+    
+    NSString *pattern=@"[\\[\\](){}]";
+    NSDictionary *bracketMatch=@{@"{" : @"}", @"[" : @"]", @"(" : @")" };
+    NSError *error=nil;
+    NSStack *expressionStack=[[NSStack alloc]init];
+    
+    NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern: pattern options:0 error:&error];
+    NSArray* matches = [regex matchesInString:input options:0 range: NSMakeRange(0, [input length])];
+    for (NSTextCheckingResult* match in matches) {
+        NSString* matchText = [input substringWithRange:[match range]];
+        NSString* bracket=[expressionStack pop];
+        if([[bracketMatch valueForKey:bracket] isEqualToString:matchText]){
+            NSLog([@"matching:"stringByAppendingString:[bracket stringByAppendingString:matchText]]);
+        }
+        else if([bracketMatch valueForKey:matchText]==NULL){
+            return [self lineFromPosition:[match range].location inText:input];
+            
+        }
+        else{
+            if (bracket)
+            [expressionStack push:bracket];
+            [expressionStack push:matchText];
+        }
+    }
+    if([expressionStack pop]){
+        return [self lineFromPosition:[input length]-1 inText:input];
+    }
+    else{
+        return -1;
+    }
+}
+
+- (int)lineFromPosition:(int) position inText:(NSString*)string{
+    NSArray *lines = [string componentsSeparatedByString:@"\n"];
+    
+    int currentLine=0;
+    int currentCharacter=0;
+    for (NSString* line in lines){
+        currentCharacter+=[line length]+1;
+        currentLine++;
+        if (position<=currentCharacter){
+            return currentLine;
+        }
+    }
+    return -1;
+//    
+//    NSString *pattern=@"\n";
+//    NSError *error=nil;
+//
+//    NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern: pattern options:0 error:&error];
+//    NSArray* matches = [regex matchesInString:string options:0 range: NSMakeRange(0, [string length])];
+//    
+//    
+//    
+//    
+//    for (NSTextCheckingResult* match in matches){
+//        
+//        currentLine++;
+//        int len=[match range].length;
+//        int loc=[match range].location;
+//        NSString* line=[string substringWithRange:[match range]];
+//        NSLog([NSString stringWithFormat:@"Line Number:%d,position%d,length%d: %@",currentLine,loc,len,line]);
+//        if(position<=[match range].location){
+//            return currentLine;
+//        }
+//        
+//    }
+//    return -1;
+}
+
+
 - (BOOL)lineRequiresSemicolon:(NSString *)line
 {
     NSLog(@"%@",line);
