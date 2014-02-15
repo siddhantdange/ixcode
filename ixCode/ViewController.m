@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "NSStack.h"
 
 @interface ViewController ()<UIAlertViewDelegate, UITextFieldDelegate>
 @property (strong, nonatomic) NSString *tempText;
@@ -62,6 +63,9 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    NSStack* aStack=[[NSStack alloc]init];
+    [aStack push:@"{"];
+    NSLog([aStack pop]);
 }
 //}
 //- (BOOL)isValid:(NSString *)string
@@ -165,6 +169,11 @@
 }
 
 - (IBAction)compileCode:(id)sender {
+    int errorline=[self errorLine:self.textEditor.text];
+    if (errorline!=-1) {
+        UIAlertView *error=[[UIAlertView alloc]initWithTitle:@"Error" message:[NSString stringWithFormat:@"Build Error %d",errorline] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [error show];
+    }
     if ([self lineRequiresSemicolon:self.textEditor.text]&&[self isValid:self.textEditor.text]) {
         [UIView animateWithDuration:1.5f
                          animations:^{

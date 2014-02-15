@@ -39,6 +39,8 @@
 		5ECD8C1918AFF00200DA0CFD /* notFinish.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ECD8C1518AFF00200DA0CFD /* notFinish.png */; };
 		5ECD8C1A18AFF00200DA0CFD /* notFinish@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ECD8C1618AFF00200DA0CFD /* notFinish@2x.png */; };
 		5EFB406A18AF08C5006DA47F /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EFB406918AF08C5006DA47F /* ViewController.xib */; };
+		E44FE4EB18AFB5FF0025E6CC /* NSStack.m in Sources */ = {isa = PBXBuildFile; fileRef = E44FE4EA18AFB5FF0025E6CC /* NSStack.m */; };
+		E44FE4EC18AFB5FF0025E6CC /* NSStack.m in Sources */ = {isa = PBXBuildFile; fileRef = E44FE4EA18AFB5FF0025E6CC /* NSStack.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +91,8 @@
 		5ECD8C1518AFF00200DA0CFD /* notFinish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notFinish.png; sourceTree = "<group>"; };
 		5ECD8C1618AFF00200DA0CFD /* notFinish@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notFinish@2x.png"; sourceTree = "<group>"; };
 		5EFB406918AF08C5006DA47F /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ViewController.xib; path = ../ViewController.xib; sourceTree = "<group>"; };
+		E44FE4E918AFB5FF0025E6CC /* NSStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStack.h; sourceTree = "<group>"; };
+		E44FE4EA18AFB5FF0025E6CC /* NSStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStack.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +156,8 @@
 				2580F71218AF058A0042F072 /* AppDelegate.m */,
 				2580F71718AF058A0042F072 /* ViewController.h */,
 				2580F71818AF058A0042F072 /* ViewController.m */,
+				E44FE4E918AFB5FF0025E6CC /* NSStack.h */,
+				E44FE4EA18AFB5FF0025E6CC /* NSStack.m */,
 				5EFB406918AF08C5006DA47F /* ViewController.xib */,
 				5E2DCD3118AF545F00AA47F7 /* asd.png */,
 				5ECD8C0918AFBBDC00DA0CFD /* screen.png */,
@@ -324,6 +330,7 @@
 				2580F71918AF058A0042F072 /* ViewController.m in Sources */,
 				2580F71318AF058A0042F072 /* AppDelegate.m in Sources */,
 				2580F70F18AF058A0042F072 /* main.m in Sources */,
+				E44FE4EB18AFB5FF0025E6CC /* NSStack.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +339,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2580F72E18AF058A0042F072 /* ixCodeTests.m in Sources */,
+				E44FE4EC18AFB5FF0025E6CC /* NSStack.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
