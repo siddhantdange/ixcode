@@ -240,6 +240,63 @@
     return true;
 }
 
+- (NSDictionary *)parseClass:(NSString *)class
+{
+    NSMutableDictionary *parsed = [NSMutableDictionary dictionary];
+    NSArray *lines = [class componentsSeparatedByString:@"\n"];
+    NSString *className = @"";
+    NSMutableDictionary *methods = [NSMutableDictionary dictionary];
+    for (NSString *l in lines)
+    {
+        NSString *line = [l stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        NSLog(@"line: %@", line);
+        if ([line length] >= [@"@implementation" length] && [[line substringToIndex:15] isEqualToString:@"@implementation"])
+        {
+            line = [[line substringFromIndex:15] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            className = [line stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        }
+        else if ([line length] >= 1 && ([[line substringToIndex:1] isEqualToString:@"-"] || [[line substringToIndex:1] isEqualToString:@"+"]))
+        {
+            line = [[line substringFromIndex:1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            int openPIndex = (int)[line rangeOfString:@"("].location;
+            int closePIndex = (int)[line rangeOfString:@")"].location;
+            NSString *returnType = [line substringWithRange:NSMakeRange(openPIndex+1, closePIndex - openPIndex-1)];
+            NSLog(@"method return type: %@", returnType);
+            line = [[line substringFromIndex:closePIndex+1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            if ([[line substringFromIndex:[line length] - 1] isEqualToString:@"{"])
+                line = [line substringToIndex:[line length] - 1];
+            NSString *methodName = [line stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            NSLog(@"method name: %@", methodName);
+            NSString *fullMethod = [class substringFromIndex:[class rangeOfString:methodName].location];
+            fullMethod = [fullMethod substringFromIndex:[fullMethod rangeOfString:@"{"].location + 1];
+            int fullMethodLength = (int)[fullMethod length];
+            int opening = 1;
+            int indexOfClosingBracket = 0;
+            for (int i = 0; i < fullMethodLength; i++)
+            {
+                NSString *currentCharacter = [fullMethod substringWithRange:NSMakeRange(i, 1)];
+                if ([currentCharacter isEqualToString:@"{"])
+                    opening++;
+                else if ([currentCharacter isEqualToString:@"}"])
+                    opening--;
+                if (opening == 0)
+                {
+                    indexOfClosingBracket = i;
+                    break;
+                }
+            }
+            NSString *methodBody = [fullMethod substringToIndex:indexOfClosingBracket - 1];
+            NSLog(@"method body: %@", [methodBody stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]);
+            NSMutableDictionary *method = [NSMutableDictionary dictionary];
+            [method setObject:returnType forKey:@"type"];
+            [method setObject:methodBody forKey:@"body"];
+            [methods setObject:method forKey:methodName];
+        }
+    }
+    [parsed setObject:methods forKey:className];
+    return parsed;
+}
+
 - (IBAction)compileCode:(id)sender {
     int errorline=[self errorLine:self.textEditor.text];
     if (errorline!=-1) {
