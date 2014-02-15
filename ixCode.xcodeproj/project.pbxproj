@@ -13,7 +13,6 @@
 		2580F70D18AF058A0042F072 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2580F70B18AF058A0042F072 /* InfoPlist.strings */; };
 		2580F70F18AF058A0042F072 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2580F70E18AF058A0042F072 /* main.m */; };
 		2580F71318AF058A0042F072 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2580F71218AF058A0042F072 /* AppDelegate.m */; };
-		2580F71618AF058A0042F072 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2580F71418AF058A0042F072 /* Main.storyboard */; };
 		2580F71918AF058A0042F072 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2580F71818AF058A0042F072 /* ViewController.m */; };
 		2580F71B18AF058A0042F072 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2580F71A18AF058A0042F072 /* Images.xcassets */; };
 		2580F72218AF058A0042F072 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2580F72118AF058A0042F072 /* XCTest.framework */; };
@@ -21,6 +20,7 @@
 		2580F72418AF058A0042F072 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2580F70618AF058A0042F072 /* UIKit.framework */; };
 		2580F72C18AF058A0042F072 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2580F72A18AF058A0042F072 /* InfoPlist.strings */; };
 		2580F72E18AF058A0042F072 /* ixCodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2580F72D18AF058A0042F072 /* ixCodeTests.m */; };
+		5EFB406A18AF08C5006DA47F /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EFB406918AF08C5006DA47F /* ViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +44,6 @@
 		2580F71018AF058A0042F072 /* ixCode-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ixCode-Prefix.pch"; sourceTree = "<group>"; };
 		2580F71118AF058A0042F072 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2580F71218AF058A0042F072 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		2580F71518AF058A0042F072 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2580F71718AF058A0042F072 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		2580F71818AF058A0042F072 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		2580F71A18AF058A0042F072 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -53,6 +52,7 @@
 		2580F72918AF058A0042F072 /* ixCodeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ixCodeTests-Info.plist"; sourceTree = "<group>"; };
 		2580F72B18AF058A0042F072 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2580F72D18AF058A0042F072 /* ixCodeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ixCodeTests.m; sourceTree = "<group>"; };
+		5EFB406918AF08C5006DA47F /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ViewController.xib; path = ../ViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,9 +114,9 @@
 			children = (
 				2580F71118AF058A0042F072 /* AppDelegate.h */,
 				2580F71218AF058A0042F072 /* AppDelegate.m */,
-				2580F71418AF058A0042F072 /* Main.storyboard */,
 				2580F71718AF058A0042F072 /* ViewController.h */,
 				2580F71818AF058A0042F072 /* ViewController.m */,
+				5EFB406918AF08C5006DA47F /* ViewController.xib */,
 				2580F71A18AF058A0042F072 /* Images.xcassets */,
 				2580F70918AF058A0042F072 /* Supporting Files */,
 			);
@@ -229,8 +229,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2580F71B18AF058A0042F072 /* Images.xcassets in Resources */,
+				5EFB406A18AF08C5006DA47F /* ViewController.xib in Resources */,
 				2580F70D18AF058A0042F072 /* InfoPlist.strings in Resources */,
-				2580F71618AF058A0042F072 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,14 +280,6 @@
 				2580F70C18AF058A0042F072 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		2580F71418AF058A0042F072 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2580F71518AF058A0042F072 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		2580F72A18AF058A0042F072 /* InfoPlist.strings */ = {
@@ -462,6 +454,7 @@
 				2580F73318AF058A0042F072 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2580F73418AF058A0042F072 /* Build configuration list for PBXNativeTarget "ixCodeTests" */ = {
 			isa = XCConfigurationList;
@@ -470,6 +463,7 @@
 				2580F73618AF058A0042F072 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
