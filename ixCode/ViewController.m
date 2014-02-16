@@ -77,7 +77,7 @@
 - (IBAction)emails:(id)sender {
     // Email Subject
     NSString *emailTitle = @"Project Share";
-    /// Email Content
+    // Email Content
     NSString *messageBody = [NSString stringWithFormat:@"---------------- \nViewController.h\n ----------------  \n %@ \n ---------------- \nViewController.m\n ---------------- \n %@",self.textEditorh.text,self.textEditor.text];
     // To address
     MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
@@ -401,6 +401,7 @@
 }
 
 - (IBAction)compileCode:(id)sender {
+    [self.log setText:@""];
         [self.view endEditing:YES];
     int errorline=[self errorLine:self.textEditor.text];
     
@@ -409,7 +410,7 @@
     }
     
     [self.errorImage setFrame:CGRectMake(513, 62+14*(self.errorLine-1), 512, 14)];
-
+    [self logwithstring:@"application started"];
     if ([self lineRequiresSemicolon:self.textEditor.text]&&[self isValid:self.textEditor.text]&&errorline==-1) {
         NSDictionary *VCDictionary = [self parseClass:self.textEditor.text];
 #warning pass this dictionary to Sid
@@ -462,6 +463,7 @@
     else{
         [UIView animateWithDuration:1.5f
                          animations:^{
+                             [self logwithstring:@"error"];
                              // temp.alpha=0.0f;
                              [self.buildImage setImage:[UIImage imageNamed:@"notFinish"]];
                              [self.buildImage setAlpha:1.0];
@@ -488,7 +490,7 @@
 }
 
 -(void)logwithstring:(NSString *)suchwow{
-    self.log.text = [self.log.text stringByAppendingString:[NSString stringWithFormat:@"\n%@ ixCode: %@",[[NSDate date] description],suchwow]];
+    self.log.text = [self.log.text stringByAppendingString:[NSString stringWithFormat:@"%@ gavel: %@\n",[[NSDate date] description],suchwow]];
 }
 
 @end
