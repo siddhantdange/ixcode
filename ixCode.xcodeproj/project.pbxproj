@@ -21,6 +21,7 @@
 		2580F72418AF058A0042F072 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2580F70618AF058A0042F072 /* UIKit.framework */; };
 		2580F72C18AF058A0042F072 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2580F72A18AF058A0042F072 /* InfoPlist.strings */; };
 		2580F72E18AF058A0042F072 /* ixCodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2580F72D18AF058A0042F072 /* ixCodeTests.m */; };
+		2588993118B068FD000653D8 /* ObjCParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2588993018B068FD000653D8 /* ObjCParser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		2580F72918AF058A0042F072 /* ixCodeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ixCodeTests-Info.plist"; sourceTree = "<group>"; };
 		2580F72B18AF058A0042F072 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2580F72D18AF058A0042F072 /* ixCodeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ixCodeTests.m; sourceTree = "<group>"; };
+		2588992F18B068FD000653D8 /* ObjCParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjCParser.h; sourceTree = "<group>"; };
+		2588993018B068FD000653D8 /* ObjCParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCParser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +122,8 @@
 				2580F71818AF058A0042F072 /* ViewController.m */,
 				2580F71A18AF058A0042F072 /* Images.xcassets */,
 				2580F70918AF058A0042F072 /* Supporting Files */,
+				2588992F18B068FD000653D8 /* ObjCParser.h */,
+				2588993018B068FD000653D8 /* ObjCParser.m */,
 			);
 			path = ixCode;
 			sourceTree = "<group>";
@@ -251,6 +256,7 @@
 			files = (
 				2580F71918AF058A0042F072 /* ViewController.m in Sources */,
 				2580F71318AF058A0042F072 /* AppDelegate.m in Sources */,
+				2588993118B068FD000653D8 /* ObjCParser.m in Sources */,
 				2580F70F18AF058A0042F072 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -462,6 +468,7 @@
 				2580F73318AF058A0042F072 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2580F73418AF058A0042F072 /* Build configuration list for PBXNativeTarget "ixCodeTests" */ = {
 			isa = XCConfigurationList;
@@ -470,6 +477,7 @@
 				2580F73618AF058A0042F072 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
