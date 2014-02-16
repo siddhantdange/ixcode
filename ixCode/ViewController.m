@@ -488,6 +488,7 @@
                              [self.lineNum2 setFrame:CGRectMake(490, 52, 27, 615-52)];
                              [self.errorNavImage setAlpha:1];
                          }];
+        
     }
 }
 
