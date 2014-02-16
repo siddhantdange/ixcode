@@ -11,6 +11,9 @@
 @class ObjCParser;
 @interface SImulatorViewController : UIViewController
 
+
+@property (nonatomic, strong) ObjCParser *parser;
+
 -(id)initWithParser:(ObjCParser*)parser;
 
 @end

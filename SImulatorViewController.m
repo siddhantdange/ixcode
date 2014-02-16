@@ -10,7 +10,6 @@
 #import "ObjCParser.h"
 
 @interface SImulatorViewController ()
-@property (nonatomic, strong) ObjCParser *parser;
 
 @end
 

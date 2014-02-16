@@ -429,8 +429,9 @@
     if ([self lineRequiresSemicolon:self.textEditor.text]&&[self isValid:self.textEditor.text]&&errorline==-1) {
         
         self.parser = [[ObjCParser alloc]init];
+        simulatorVC.parser = self.parser;
         NSString *totalBody = self.textEditor.text;
-        [self.parser initParserWithDispatchTable:[self parseClass:totalBody].mutableCopy andViewController:simulatorVC andLoggerBlock:^(NSString *log){   
+        [self.parser initParserWithDispatchTable:[self parseClass:totalBody].mutableCopy  andViewController:simulatorVC andLoggerBlock:^(NSString *log){   
             [self logwithstring:log];
         }];
         [self.parser startMethod:@"viewDidLoad"];

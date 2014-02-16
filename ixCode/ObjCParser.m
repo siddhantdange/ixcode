@@ -52,12 +52,11 @@
     
     
     //return @"{NSMutableString *string = [[NSMutableString alloc] initWithString:@\"yee\\shere!\"]; [string appendString:@\"\\slegoo!\"}";
-    return @"{ UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(50,100,100,50)]; [button addTarget:self action:@selector(addButton) forControlEvents:UIControlEventTouchUpInside]; UIColor *color = [UIColor redColor]; [button setBackgroundColor:color]; [button setTitle:@\"click\\sme!\" forState:UIControlStateNormal]; [[self view] addSubview:button]; UIColor *orangeColor = [UIColor orangeColor]; [[self view] setBackgroundColor:orangeColor];}";
+    return @"{ UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(50,100,100,50)]; [button addTarget:self action:@selector(addButton) forControlEvents:UIControlEventTouchUpInside]; UIColor *color = [UIColor redColor]; [button setBackgroundColor:color]; [[self view] addSubview:button]; UIColor *orangeColor = [UIColor orangeColor]; [[self view] setBackgroundColor:orangeColor];}";
 }
 
 -(void)processMethodBody:(NSString*)methodBody{
     methodBody = [methodBody substringFromIndex:[methodBody rangeOfString:@"{"].location + 1];
-    //[UIButton alloc] init];
     
     //split line by line
     NSMutableArray *bodyLines = [NSMutableArray new];
@@ -188,7 +187,7 @@
             returner = [obj performSelector:selector withObject:nil withObject:nil];
         }
     } else if(self.dispatchTable[NSStringFromSelector(selector)]){
-        [self processMethodBody:self.dispatchTable[NSStringFromSelector(selector)]];
+        [self processMethodBody:self.dispatchTable[@"ViewController"][NSStringFromSelector(selector)][@"body"]];
     }
     
     return returner;
@@ -348,9 +347,9 @@
 
 -(id)forwardingTargetForSelector:(SEL)aSelector{
     
-    if(self.dispatchTable[NSStringFromSelector(aSelector)]){
+    if(self.dispatchTable[@"ViewController"][NSStringFromSelector(aSelector)]){
         
-        [self processMethodBody:self.dispatchTable[NSStringFromSelector(aSelector)][@"body"]];
+        [self processMethodBody:self.dispatchTable[@"ViewController"][NSStringFromSelector(aSelector)][@"body"]];
         [self methodIMPCopy:self.class forOrigSel:aSelector andAltSel:@selector(blankMethod)];
     }
     
