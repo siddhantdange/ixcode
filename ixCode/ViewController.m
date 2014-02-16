@@ -160,19 +160,31 @@
     NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern: pattern options:0 error:&error];
     NSArray* matches = [regex matchesInString:input options:0 range: NSMakeRange(0, [input length])];
     for (NSTextCheckingResult* match in matches) {
-        NSString* matchText = [input substringWithRange:[match range]];
-        NSString* bracket=[expressionStack pop];
-        if([[bracketMatch valueForKey:bracket] isEqualToString:matchText]){
-            NSLog([@"matching:"stringByAppendingString:[bracket stringByAppendingString:matchText]]);
+        NSString* newBracket = [input substringWithRange:[match range]];
+        NSString* oldBracket=[expressionStack pop];
+        if(oldBracket==NULL) {
+            if([bracketMatch valueForKey:newBracket])
+                [expressionStack push:newBracket];
+            else{
+                int linenumber=[self lineFromPosition:[match range].location inText:input];
+                [self logwithstring:[NSString stringWithFormat:@"Extra %@ at line %d", newBracket, linenumber]];
+                return linenumber;
+                
+            }
         }
-        else if([bracketMatch valueForKey:matchText]==NULL){
+        else if([[bracketMatch valueForKey:oldBracket] isEqualToString:newBracket]){
+            NSLog([@"matching:"stringByAppendingString:[oldBracket stringByAppendingString:newBracket]]);
+        }
+        else if([bracketMatch valueForKey:newBracket]==NULL){
+            int linenumber=[self lineFromPosition:[match range].location inText:input];
+            [self logwithstring:[NSString stringWithFormat:@"Extra %@ at line %d", newBracket, linenumber]];
             return [self lineFromPosition:[match range].location inText:input];
-            
         }
+        
         else{
-            if (bracket)
-            [expressionStack push:bracket];
-            [expressionStack push:matchText];
+            if (oldBracket)
+            [expressionStack push:oldBracket];
+            [expressionStack push:newBracket];
         }
     }
     if([expressionStack pop]){
@@ -192,9 +204,11 @@
         currentCharacter+=[line length]+1;
         currentLine++;
         if (position<=currentCharacter){
+            NSLog(@"SHIT %d",currentLine);
             return currentLine;
         }
     }
+    NSLog(@"Shit %d",currentLine);
     return -1;
 //    
 //    NSString *pattern=@"\n";
@@ -386,7 +400,7 @@
 }
 
 -(void)logwithstring:(NSString *)suchwow{
-    self.log.text = [self.log.text stringByAppendingString:[NSString stringWithFormat:@"\n%@",suchwow]];
+    self.log.text = [self.log.text stringByAppendingString:[NSString stringWithFormat:@"\n%@ ixCode: %@",[[NSDate date] description],suchwow]];
 }
 
 @end
