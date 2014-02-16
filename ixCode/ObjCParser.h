@@ -10,7 +10,7 @@
 
 @interface ObjCParser : NSObject
 
--(void)startWithMethods:(NSMutableDictionary*)dispatchTable andViewController:(UIViewController*)vc;
+-(void)startWithMethods:(NSMutableDictionary*)dispatchTable andViewController:(UIViewController*)vc andLoggerBlock:(void(^)(NSString*))loggerBlock;
 -(void)startMethod:(NSString*)method;
 
 @end
