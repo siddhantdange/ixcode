@@ -37,9 +37,9 @@
     [super viewDidLoad];
     simulatorVC = [[SImulatorViewController alloc] initWithParser:self.parser];
     [self addChildViewController:simulatorVC];
-    [simulatorVC.view setFrame:CGRectMake(763, 126, 239, 398)];
+    [simulatorVC.view setFrame:CGRectMake(756, 126, 239, 398)];
     [self.view addSubview:simulatorVC.view];
-    
+    [simulatorVC.view setBackgroundColor:[UIColor yellowColor]];
     UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Name of Project" message:@"Please enter the name" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
     av.alertViewStyle = UIAlertViewStylePlainTextInput;
     [av textFieldAtIndex:0].delegate = self;

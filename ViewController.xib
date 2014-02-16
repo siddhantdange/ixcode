@@ -70,7 +70,7 @@
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="asd.png" translatesAutoresizingMaskIntoConstraints="NO" id="rzZ-aA-p3t">
-                    <rect key="frame" x="737" y="52" width="287" height="570"/>
+                    <rect key="frame" x="736" y="52" width="296" height="570"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j1N-BJ-8Of">
