@@ -19,6 +19,11 @@
     [self.window makeKeyAndVisible];
     return YES;
 }
+
+
+-(void)logString:(NSString *)string{
+    
+}
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {

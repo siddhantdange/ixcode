@@ -312,7 +312,6 @@
         self.errorLine = errorline;
     }
     
-    
     [self.errorImage setFrame:CGRectMake(513, 62+14*(self.errorLine-1), 512, 14)];
 
     if ([self lineRequiresSemicolon:self.textEditor.text]&&[self isValid:self.textEditor.text]&&errorline==-1) {
@@ -380,6 +379,8 @@
     }
 }
 
-
+-(void)logwithstring:(NSString *)nsstring{
+    
+}
 
 @end

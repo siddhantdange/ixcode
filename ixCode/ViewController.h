@@ -15,9 +15,6 @@
 @property (weak, nonatomic) IBOutlet UITextView *textEditor;
 @property (weak, nonatomic) IBOutlet UITextView *textEditorh;
 
+-(void)logwithstring:(NSString *)nsstring;
 
-//.m 357 54 385 714
-//.h 0 54 355 714
-
-//385 + 57
 @end
