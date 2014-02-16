@@ -374,10 +374,4 @@
     class_replaceMethod(aClass, orig_sel, method_getImplementation(swizzled), ((NSString*)self.dispatchTable[NSStringFromSelector(orig_sel)][@"type"]).UTF8String);
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 @end
