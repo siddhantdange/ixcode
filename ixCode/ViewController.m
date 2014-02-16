@@ -399,11 +399,14 @@
 }
 
 - (IBAction)compileCode:(id)sender {
+    
     [self.log setText:@""];
         [self.view endEditing:YES];
     int errorline=[self errorLine:self.textEditor.text];
     
     [self log:@"application started"];
+    [self findNSLog:self.textEditor.text];
+
     
     if (errorline>self.errorLine) {
         self.errorLine = errorline;
@@ -490,6 +493,22 @@
 
 -(void)log:(NSString *)suchwow{
     self.log.text = [self.log.text stringByAppendingString:[NSString stringWithFormat:@"%@ gavel: %@\n",[[NSDate date] description],suchwow]];
+}
+
+-(void)findNSLog:(NSString *)input
+{
+    NSString* pattern=@"NSLog\\(@?\"?(.*)\"?\\);";
+    NSError *e;
+    NSRegularExpression *regex=[NSRegularExpression regularExpressionWithPattern:pattern options:0 error:&e];
+    NSArray *matches=[regex matchesInString:input options:0 range:NSMakeRange(0, [input length])];
+    //[regex stringByReplacingMatchesInString:input options:0 range:NSMakeRange(0, [input length]) withTemplate:@"$1"];
+    
+    for (NSTextCheckingResult* match in matches){
+        NSString* print = [input substringWithRange:[match rangeAtIndex:1]];
+        NSString* quote=@"\"";
+        [self log:[print substringWithRange:NSMakeRange(0, [print length]-1)]];
+    }
+    
 }
 
 @end
