@@ -247,7 +247,7 @@
                 [expressionStack push:newBracket];
             else{
                 int linenumber=[self lineFromPosition:[match range].location inText:input];
-                [self logwithstring:[NSString stringWithFormat:@"Extra %@ at line %d", newBracket, linenumber]];
+                [self log:[NSString stringWithFormat:@"Extra %@ at line %d", newBracket, linenumber]];
                 return linenumber;
                 
             }
@@ -257,7 +257,7 @@
         }
         else if([bracketMatch valueForKey:newBracket]==NULL){
             int linenumber=[self lineFromPosition:[match range].location inText:input];
-            [self logwithstring:[NSString stringWithFormat:@"Extra %@ at line %d", newBracket, linenumber]];
+            [self log:[NSString stringWithFormat:@"Extra %@ at line %d", newBracket, linenumber]];
             return [self lineFromPosition:[match range].location inText:input];
         }
         
@@ -284,11 +284,9 @@
         currentCharacter+=[line length]+1;
         currentLine++;
         if (position<=currentCharacter){
-            NSLog(@"SHIT %d",currentLine);
             return currentLine;
         }
     }
-    NSLog(@"Shit %d",currentLine);
     return -1;
 //    
 //    NSString *pattern=@"\n";
@@ -405,12 +403,13 @@
         [self.view endEditing:YES];
     int errorline=[self errorLine:self.textEditor.text];
     
+    [self log:@"application started"];
+    
     if (errorline>self.errorLine) {
         self.errorLine = errorline;
     }
     
     [self.errorImage setFrame:CGRectMake(513, 62+14*(self.errorLine-1), 512, 14)];
-    [self logwithstring:@"application started"];
     if ([self lineRequiresSemicolon:self.textEditor.text]&&[self isValid:self.textEditor.text]&&errorline==-1) {
         NSDictionary *VCDictionary = [self parseClass:self.textEditor.text];
 #warning pass this dictionary to Sid
@@ -463,7 +462,7 @@
     else{
         [UIView animateWithDuration:1.5f
                          animations:^{
-                             [self logwithstring:@"error"];
+                             [self log:@"error"];
                              // temp.alpha=0.0f;
                              [self.buildImage setImage:[UIImage imageNamed:@"notFinish"]];
                              [self.buildImage setAlpha:1.0];
@@ -489,7 +488,7 @@
     }
 }
 
--(void)logwithstring:(NSString *)suchwow{
+-(void)log:(NSString *)suchwow{
     self.log.text = [self.log.text stringByAppendingString:[NSString stringWithFormat:@"%@ gavel: %@\n",[[NSDate date] description],suchwow]];
 }
 

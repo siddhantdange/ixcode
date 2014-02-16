@@ -17,7 +17,7 @@
 @property (strong, nonatomic) IBOutlet UITextView *textEditorh;
 @property (weak, nonatomic) UIView *simulator;
 
--(void)logwithstring:(NSString *)nsstring;
+-(void)log:(NSString *)nsstring;
 
 //27
 
