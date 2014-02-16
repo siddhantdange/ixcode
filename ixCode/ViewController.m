@@ -379,8 +379,8 @@
     }
 }
 
--(void)logwithstring:(NSString *)nsstring{
-    
+-(void)logwithstring:(NSString *)suchwow{
+    self.log.text = [self.log.text stringByAppendingString:suchwow];
 }
 
 @end
