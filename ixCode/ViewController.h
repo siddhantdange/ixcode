@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MFMailComposeViewController.h>
-
+#import "ObjCParser.h"
+#import "SImulatorViewController.h"
 @interface ViewController : UIViewController<MFMailComposeViewControllerDelegate>{
     BOOL isMax;
-    
+    IBOutlet SImulatorViewController *simulatorVC;
 }
 @property (strong, nonatomic) IBOutlet UITextView *textEditor;
 @property (strong, nonatomic) IBOutlet UITextView *textEditorh;

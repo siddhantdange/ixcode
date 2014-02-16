@@ -14,6 +14,7 @@
 @property (strong, nonatomic) UIImageView *errorImage;
 @property (strong, nonatomic) UIImageView *buildImage;
 @property (weak, nonatomic) IBOutlet UIImageView *loadingBar;
+@property (nonatomic, strong) ObjCParser *parser;
 
 @property (strong, nonatomic) IBOutlet UITextView *log;
 @property int errorLine;
@@ -34,6 +35,11 @@
 {
     
     [super viewDidLoad];
+    simulatorVC = [[SImulatorViewController alloc] initWithParser:self.parser];
+    [self addChildViewController:simulatorVC];
+    [simulatorVC.view setFrame:CGRectMake(763, 126, 239, 398)];
+    [self.view addSubview:simulatorVC.view];
+    
     UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Name of Project" message:@"Please enter the name" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
     av.alertViewStyle = UIAlertViewStylePlainTextInput;
     [av textFieldAtIndex:0].delegate = self;
@@ -392,6 +398,10 @@
             NSLog(@"method body: %@", [methodBody stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]);
             NSMutableDictionary *method = [NSMutableDictionary dictionary];
             [method setObject:returnType forKey:@"type"];
+            methodBody = [NSString stringWithFormat:@"{%@}", methodBody];
+            methodBody = [methodBody stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            methodBody = [methodBody stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+            methodBody = [methodBody stringByReplacingOccurrencesOfString:@"\t" withString:@" "];
             [method setObject:methodBody forKey:@"body"];
             [methods setObject:method forKey:methodName];
         }
@@ -403,6 +413,8 @@
 - (IBAction)compileCode:(id)sender {
     [self.log setText:@""];
         [self.view endEditing:YES];
+    
+    
     int errorline=[self errorLine:self.textEditor.text];
     
     if (errorline>self.errorLine) {
@@ -411,11 +423,17 @@
     
     [self.errorImage setFrame:CGRectMake(513, 62+14*(self.errorLine-1), 512, 14)];
     [self logwithstring:@"application started"];
+    
+
+    
     if ([self lineRequiresSemicolon:self.textEditor.text]&&[self isValid:self.textEditor.text]&&errorline==-1) {
-        NSDictionary *VCDictionary = [self parseClass:self.textEditor.text];
-#warning pass this dictionary to Sid
         
-        
+        self.parser = [[ObjCParser alloc]init];
+        NSString *totalBody = self.textEditor.text;
+        [self.parser initParserWithDispatchTable:[self parseClass:totalBody].mutableCopy andViewController:simulatorVC andLoggerBlock:^(NSString *log){   
+            [self logwithstring:log];
+        }];
+        [self.parser startMethod:@"viewDidLoad"];
         [UIView animateWithDuration:1.5f
                          animations:^{
                              // temp.alpha=0.0f;
@@ -492,5 +510,9 @@
 -(void)logwithstring:(NSString *)suchwow{
     self.log.text = [self.log.text stringByAppendingString:[NSString stringWithFormat:@"%@ gavel: %@\n",[[NSDate date] description],suchwow]];
 }
+
+/*
+ UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(50,100,100,50)]; [button addTarget:self action:@selector(logStuff) forControlEvents:UIControlEventTouchUpInside]; UIColor *color = [UIColor redColor]; [button setBackgroundColor:color]; [[self view] addSubview:button]; UIColor *orangeColor = [UIColor orangeColor]; [[self view] setBackgroundColor:orangeColor];
+ */
 
 @end

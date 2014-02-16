@@ -23,6 +23,8 @@
 		5E2DCD2E18AF50BE00AA47F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E2DCD2D18AF50BE00AA47F7 /* Main.storyboard */; };
 		5E2DCD3018AF532F00AA47F7 /* 5r.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E2DCD2F18AF532F00AA47F7 /* 5r.png */; };
 		5E2DCD3218AF545F00AA47F7 /* asd.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E2DCD3118AF545F00AA47F7 /* asd.png */; };
+		5E3521BF18B0DF87007CE3FF /* ObjCParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E3521BE18B0DF87007CE3FF /* ObjCParser.m */; };
+		5E3521C218B0E0E1007CE3FF /* SImulatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E3521C118B0E0E1007CE3FF /* SImulatorViewController.m */; };
 		5E4907A518B0A6AD0013A7C6 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E4907A418B0A6AD0013A7C6 /* icon.png */; };
 		5E4907A718B0A6B10013A7C6 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E4907A618B0A6B10013A7C6 /* icon@2x.png */; };
 		5EB7FF5418AFAA59000325DA /* succeeded.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB7FF5318AFAA59000325DA /* succeeded.png */; };
@@ -78,6 +80,10 @@
 		5E2DCD2D18AF50BE00AA47F7 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../Main.storyboard; sourceTree = "<group>"; };
 		5E2DCD2F18AF532F00AA47F7 /* 5r.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5r.png; sourceTree = "<group>"; };
 		5E2DCD3118AF545F00AA47F7 /* asd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asd.png; sourceTree = "<group>"; };
+		5E3521BD18B0DF87007CE3FF /* ObjCParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjCParser.h; sourceTree = "<group>"; };
+		5E3521BE18B0DF87007CE3FF /* ObjCParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCParser.m; sourceTree = "<group>"; };
+		5E3521C018B0E0E1007CE3FF /* SImulatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SImulatorViewController.h; path = ../SImulatorViewController.h; sourceTree = "<group>"; };
+		5E3521C118B0E0E1007CE3FF /* SImulatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SImulatorViewController.m; path = ../SImulatorViewController.m; sourceTree = "<group>"; };
 		5E4907A418B0A6AD0013A7C6 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		5E4907A618B0A6B10013A7C6 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		5EB7FF5318AFAA59000325DA /* succeeded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = succeeded.png; sourceTree = "<group>"; };
@@ -164,6 +170,10 @@
 				2580F71818AF058A0042F072 /* ViewController.m */,
 				E44FE4E918AFB5FF0025E6CC /* NSStack.h */,
 				E44FE4EA18AFB5FF0025E6CC /* NSStack.m */,
+				5E3521BD18B0DF87007CE3FF /* ObjCParser.h */,
+				5E3521BE18B0DF87007CE3FF /* ObjCParser.m */,
+				5E3521C018B0E0E1007CE3FF /* SImulatorViewController.h */,
+				5E3521C118B0E0E1007CE3FF /* SImulatorViewController.m */,
 				5EFB406918AF08C5006DA47F /* ViewController.xib */,
 				5E2DCD3118AF545F00AA47F7 /* asd.png */,
 				5ECD8C0918AFBBDC00DA0CFD /* screen.png */,
@@ -340,9 +350,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2580F71918AF058A0042F072 /* ViewController.m in Sources */,
+				5E3521BF18B0DF87007CE3FF /* ObjCParser.m in Sources */,
 				2580F71318AF058A0042F072 /* AppDelegate.m in Sources */,
 				2580F70F18AF058A0042F072 /* main.m in Sources */,
 				E44FE4EB18AFB5FF0025E6CC /* NSStack.m in Sources */,
+				5E3521C218B0E0E1007CE3FF /* SImulatorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
