@@ -99,9 +99,9 @@
 }
 
 -(void)setEditorTextwithString:(NSString *)project{
-    NSString *string = [NSString stringWithFormat:@"// \n//  ViewController.m\n//  %@\n//\n//  Created by user on 2/14/14.\n//  Copyright (c) 2014 user. All rights reserved.\n//\n\n#import <ViewController.h>\n\n@implementation ViewController\n\n-(void)viewDidLoad{\n\n}\n\n@end",project];
-    self.tempText = [NSString stringWithFormat:@"// \n//  ViewController.m\n//  %@\n//\n//  Created by user on 2/14/14.\n//  Copyright (c) 2014 user. All rights reserved.\n//\n\n#import <ViewController.h>\n\n@implementation ViewController\n\n",project];
-    NSString *stringH = [NSString stringWithFormat:@"// \n//  ViewController.h\n//  %@\n//\n//  Created by user on 2/14/14.\n//  Copyright (c) 2014 user. All rights reserved.\n//\n\n#import <UIKit/UIKit.h>\n\n@interface ViewController : UIViewController\n\n@end",project];
+    NSString *string = [NSString stringWithFormat:@"// \n//  ViewController.m\n//  %@\n//\n//  Created by user on 2/16/14.\n//  Copyright (c) 2014 user. All rights reserved.\n//\n\n#import <ViewController.h>\n\n@implementation ViewController\n\n-(void)viewDidLoad{\n\n}\n\n@end",project];
+    self.tempText = [NSString stringWithFormat:@"// \n//  ViewController.m\n//  %@\n//\n//  Created by user on 2/16/14.\n//  Copyright (c) 2014 user. All rights reserved.\n//\n\n#import <ViewController.h>\n\n@implementation ViewController\n\n",project];
+    NSString *stringH = [NSString stringWithFormat:@"// \n//  ViewController.h\n//  %@\n//\n//  Created by user on 2/16/14.\n//  Copyright (c) 2014 user. All rights reserved.\n//\n\n#import <UIKit/UIKit.h>\n\n@interface ViewController : UIViewController\n\n@end",project];
 
     
     
@@ -315,6 +315,10 @@
     [self.errorImage setFrame:CGRectMake(513, 62+14*(self.errorLine-1), 512, 14)];
 
     if ([self lineRequiresSemicolon:self.textEditor.text]&&[self isValid:self.textEditor.text]&&errorline==-1) {
+        NSDictionary *VCDictionary = [self parseClass:self.textEditor.text];
+#warning pass this dictionary to Sid
+        
+        
         [UIView animateWithDuration:1.5f
                          animations:^{
                              // temp.alpha=0.0f;
