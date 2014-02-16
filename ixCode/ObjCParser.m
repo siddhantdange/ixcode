@@ -18,7 +18,7 @@
 
 @implementation ObjCParser
 
--(void)startWithMethods:(NSMutableDictionary*)dispatchTable andViewController:(UIViewController*)vc andLoggerBlock:(void(^)(NSString*))loggerBlock{
+-(void)initParserWithDispatchTable:(NSMutableDictionary*)dispatchTable andViewController:(UIViewController*)vc andLoggerBlock:(void(^)(NSString*))loggerBlock{
     
     self.loggerBlock = loggerBlock;
     self.superStack = @{@"self" : vc, @"super" : vc.superclass, @"nil" : [NSNull null]}.mutableCopy;
