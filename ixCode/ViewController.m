@@ -37,7 +37,7 @@
     [super viewDidLoad];
     simulatorVC = [[SImulatorViewController alloc] initWithParser:self.parser];
     [self addChildViewController:simulatorVC];
-    [simulatorVC.view setFrame:CGRectMake(763, 126, 239, 398)];
+    [simulatorVC.view setFrame:CGRectMake(757, 126, 239, 398)];
     [self.view addSubview:simulatorVC.view];
     
     UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Name of Project" message:@"Please enter the name" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
@@ -428,11 +428,7 @@
     
     if ([self lineRequiresSemicolon:self.textEditor.text]&&[self isValid:self.textEditor.text]&&errorline==-1) {
         
-        self.parser = [[ObjCParser alloc]init];
-        NSString *totalBody = self.textEditor.text;
-        [self.parser initParserWithDispatchTable:[self parseClass:totalBody].mutableCopy andViewController:simulatorVC andLoggerBlock:^(NSString *log){   
-            [self logwithstring:log];
-        }];
+
         [self.parser startMethod:@"viewDidLoad"];
         [UIView animateWithDuration:1.5f
                          animations:^{
@@ -444,6 +440,11 @@
                              
                          }
                          completion:^(BOOL finished) {
+                             self.parser = [[ObjCParser alloc]init];
+                             NSString *totalBody = self.textEditor.text;
+                             [self.parser initParserWithDispatchTable:[self parseClass:totalBody].mutableCopy andViewController:simulatorVC andLoggerBlock:^(NSString *log){
+                                 [self logwithstring:log];
+                             }];
                              [self.loadingBar setFrame:CGRectMake(291, 26, 0, 14)];
                              [self.buildImage setImage:[UIImage imageNamed:@"didFinish"]];
                              [self.buildImage setAlpha:1.0];
