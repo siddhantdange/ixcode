@@ -42,8 +42,6 @@
 		5EFB406A18AF08C5006DA47F /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EFB406918AF08C5006DA47F /* ViewController.xib */; };
 		E44FE4EB18AFB5FF0025E6CC /* NSStack.m in Sources */ = {isa = PBXBuildFile; fileRef = E44FE4EA18AFB5FF0025E6CC /* NSStack.m */; };
 		E44FE4EC18AFB5FF0025E6CC /* NSStack.m in Sources */ = {isa = PBXBuildFile; fileRef = E44FE4EA18AFB5FF0025E6CC /* NSStack.m */; };
-		E4C8F23C18B05EBF00CDA691 /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C8F23B18B05EBF00CDA691 /* Logger.m */; };
-		E4C8F23D18B05EBF00CDA691 /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C8F23B18B05EBF00CDA691 /* Logger.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,8 +95,6 @@
 		5EFB406918AF08C5006DA47F /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ViewController.xib; path = ../ViewController.xib; sourceTree = "<group>"; };
 		E44FE4E918AFB5FF0025E6CC /* NSStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStack.h; sourceTree = "<group>"; };
 		E44FE4EA18AFB5FF0025E6CC /* NSStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStack.m; sourceTree = "<group>"; };
-		E4C8F23A18B05EBF00CDA691 /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
-		E4C8F23B18B05EBF00CDA691 /* Logger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Logger.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,8 +158,6 @@
 				2580F71218AF058A0042F072 /* AppDelegate.m */,
 				2580F71718AF058A0042F072 /* ViewController.h */,
 				2580F71818AF058A0042F072 /* ViewController.m */,
-				E4C8F23A18B05EBF00CDA691 /* Logger.h */,
-				E4C8F23B18B05EBF00CDA691 /* Logger.m */,
 				E44FE4E918AFB5FF0025E6CC /* NSStack.h */,
 				E44FE4EA18AFB5FF0025E6CC /* NSStack.m */,
 				5EFB406918AF08C5006DA47F /* ViewController.xib */,
@@ -341,7 +335,6 @@
 				2580F71318AF058A0042F072 /* AppDelegate.m in Sources */,
 				2580F70F18AF058A0042F072 /* main.m in Sources */,
 				E44FE4EB18AFB5FF0025E6CC /* NSStack.m in Sources */,
-				E4C8F23C18B05EBF00CDA691 /* Logger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,7 +343,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2580F72E18AF058A0042F072 /* ixCodeTests.m in Sources */,
-				E4C8F23D18B05EBF00CDA691 /* Logger.m in Sources */,
 				E44FE4EC18AFB5FF0025E6CC /* NSStack.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

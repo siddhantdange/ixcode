@@ -166,14 +166,18 @@
             if([bracketMatch valueForKey:newBracket])
                 [expressionStack push:newBracket];
             else{
-                return [self lineFromPosition:[match range].location inText:input];
+                int linenumber=[self lineFromPosition:[match range].location inText:input];
+                [self logwithstring:[NSString stringWithFormat:@"Extra %@ at line %d", newBracket, linenumber]];
+                return linenumber;
+                
             }
         }
         else if([[bracketMatch valueForKey:oldBracket] isEqualToString:newBracket]){
             NSLog([@"matching:"stringByAppendingString:[oldBracket stringByAppendingString:newBracket]]);
         }
         else if([bracketMatch valueForKey:newBracket]==NULL){
-            NSLog([newBracket stringByAppendingString:oldBracket]);
+            int linenumber=[self lineFromPosition:[match range].location inText:input];
+            [self logwithstring:[NSString stringWithFormat:@"Extra %@ at line %d", newBracket, linenumber]];
             return [self lineFromPosition:[match range].location inText:input];
         }
         
@@ -396,7 +400,7 @@
 }
 
 -(void)logwithstring:(NSString *)suchwow{
-    self.log.text = [self.log.text stringByAppendingString:[NSString stringWithFormat:@"\n%@",suchwow]];
+    self.log.text = [self.log.text stringByAppendingString:[NSString stringWithFormat:@"\n%@ ixCode: %@",[[NSDate date] description],suchwow]];
 }
 
 @end
