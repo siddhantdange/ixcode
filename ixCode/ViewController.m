@@ -18,10 +18,17 @@
 @property (strong, nonatomic) IBOutlet UITextView *log;
 @property int errorLine;
 @property (weak, nonatomic) IBOutlet UIImageView *errorNavImage;
+@property (weak, nonatomic) IBOutlet UITextView *lineNum;
+@property (weak, nonatomic) IBOutlet UITextView *lineNum2;
+@property (weak, nonatomic) IBOutlet UIProgressView *progressBar;
 
 @end
 
 @implementation ViewController
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
 
 - (void)viewDidLoad
 {
@@ -33,33 +40,107 @@
     [av show];
     [self.errorNavImage setAlpha:0];
     isMax = true;
+    self.progressBar.progress = 0.0;
+    NSString *lineNumbers = @"";
+    for (int i = 0; i < 50; i++){
+        lineNumbers = [lineNumbers stringByAppendingString:[NSString stringWithFormat:@"%i\n",i]];
+    }
+    
+    NSLog(@"Numbers = %@",lineNumbers);
     self.errorImage = [[UIImageView alloc]initWithFrame:CGRectMake(357, 63+19*12, 385, 19)];
     [self.errorImage setBackgroundColor:[UIColor redColor]];
     [self.errorImage setAlpha:0.7];
     self.buildImage = [[UIImageView alloc]initWithFrame:CGRectMake(412, 311, 200, 200)];
     [self.log setFrame:CGRectMake(768, 0, 742, 238)];
-    
+    [self.lineNum setText:lineNumbers];
+    [self.lineNum2 setText:lineNumbers];
     //self.loadingBar.layer.cornerRadius = self.loadingBar.frame.size.height/2;
-
+    
     [self.view addSubview:self.buildImage];
 
 }
+
+- (void)makeMyProgressBarMoving {
+    
+    float actual = [self.progressBar progress];
+    if (actual < 1) {
+        self.progressBar.progress = actual + .05;
+        [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(makeMyProgressBarMoving) userInfo:nil repeats:NO];
+    }
+    else{
+        
+        
+        
+    }
+    
+}
+- (IBAction)emails:(id)sender {
+    // Email Subject
+    NSString *emailTitle = @"Project Share";
+    // Email Content
+    NSString *messageBody = [NSString stringWithFormat:@"---------------- \nViewController.h\n ----------------  \n %@ \n ---------------- \nViewController.m\n ---------------- \n %@",self.textEditorh.text,self.textEditor.text];
+    // To address
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+    mc.mailComposeDelegate = self;
+    [mc setSubject:emailTitle];
+    [mc setMessageBody:messageBody isHTML:NO];
+    
+    // Present mail view controller on screen
+    [self presentViewController:mc animated:YES completion:NULL];
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail sent");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
+    }
+    
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+
 - (IBAction)rightSwipe:(UISwipeGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateEnded) {
-        [self.textEditorh setFrame:CGRectMake(0, 54, 511, 714)];
-        [self.textEditor setFrame:CGRectMake(513, 54, 511, 714)];
+        [self stop:nil];
         [self.view endEditing:YES];
     }
 }
 
 - (IBAction)stop:(id)sender {
-    [self.textEditorh setFrame:CGRectMake(0, 54, 511, 714)];
+    [self.textEditorh setFrame:CGRectMake(22, 52, 469, 716)];
     [self.textEditor setFrame:CGRectMake(513, 54, 511, 714)];
+    [self.lineNum setFrame:CGRectMake(0, 52, 27, 716)];
+    [self.lineNum2 setFrame:CGRectMake(490, 54, 27, 716)];
     [self.buildImage setAlpha:0.0];
+    self.progressBar.progress = 0.0;
     [self.log setFrame:CGRectMake(0, 768, 1024, 153)];
     [self.view endEditing:YES];
 }
 
+
+-(void)backtoNormal{
+    [self.textEditorh setFrame:CGRectMake(22, 52, 469, 716)];
+    [self.textEditor setFrame:CGRectMake(513, 54, 511, 714)];
+    [self.lineNum setFrame:CGRectMake(0, 52, 27, 716)];
+    [self.lineNum2 setFrame:CGRectMake(490, 54, 27, 716)];
+    [self.buildImage setAlpha:0.0];
+
+}
 
 
 - (void)didReceiveMemoryWarning
@@ -127,14 +208,13 @@
         {
             if (![[line substringFromIndex:[line length] - 1] isEqualToString:@";"]){
                 
-                [UIView beginAnimations:nil context:nil];
-                [UIView setAnimationDuration:0.5];
-                [UIView setAnimationDelay:1.0];
-                [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-                [self.textEditorh setFrame:CGRectMake(0, 54, 511, 714)];
-                [self.textEditor setFrame:CGRectMake(513, 54, 511, 714)];
-                
-                [UIView commitAnimations];
+//                [UIView beginAnimations:nil context:nil];
+//                [UIView setAnimationDuration:0.5];
+//                [UIView setAnimationDelay:1.0];
+//                [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+//                [self.textEditor setFrame:CGRectMake(395, 52, 350, 716)];
+//                [self.textEditorh setFrame:CGRectMake(22, 52, 350, 716)];
+//                [UIView commitAnimations];
                 [self.errorImage setFrame:CGRectMake(513, 62+ 14*i, 512, 14)];
                 if (i>self.errorLine) {
                     self.errorLine = i;
@@ -339,8 +419,8 @@
                          animations:^{
                              // temp.alpha=0.0f;
                              [self.loadingBar setFrame:CGRectMake(291, 26, 439, 14)];
-                             self.loadingBar.layer.cornerRadius = self.loadingBar.frame.size.height/2;
-                             //z[temp setAlpha:0.0];
+                             self.progressBar.progress = 0.0;
+                             [self performSelectorOnMainThread:@selector(makeMyProgressBarMoving) withObject:nil waitUntilDone:NO];                             //z[temp setAlpha:0.0];
                              
                              
                          }
@@ -359,9 +439,11 @@
                                                   [UIView animateWithDuration:1.0f
                                                                    animations:^{
                                                                        // temp.alpha=0.0f;
-                                                                       [self.textEditor setFrame:CGRectMake(357, 54, 385, 714)];
-                                                                       [self.textEditorh setFrame:CGRectMake(0, 54, 355, 714)];
+                                                                        [self.textEditor setFrame:CGRectMake(395, 52, 350, 716)];
+                                                                       [self.textEditorh setFrame:CGRectMake(22, 52, 350, 716)];
                                                                        [self.log setFrame:CGRectMake(0, 615, 1024, 153)];
+                                                                       [self.lineNum setFrame:CGRectMake(0, 52, 27, 615-52)];
+                                                                       [self.lineNum2 setFrame:CGRectMake(370, 52, 27, 615-52)];
                                                                        //z[temp setAlpha:0.0];
                                                                    }
                                                                    completion:^(BOOL finished) {
@@ -381,19 +463,25 @@
         [UIView animateWithDuration:1.5f
                          animations:^{
                              // temp.alpha=0.0f;
+                             [self.buildImage setImage:[UIImage imageNamed:@"notFinish"]];
+                             [self.buildImage setAlpha:1.0];
+                             [self performSelectorOnMainThread:@selector(makeMyProgressBarMoving) withObject:nil waitUntilDone:NO];
                              [self.loadingBar setFrame:CGRectMake(291, 26, 439, 14)];
                              self.loadingBar.layer.cornerRadius = self.loadingBar.frame.size.height/2;
                              [self.log setFrame:CGRectMake(0, 768, 1024, 153)];
+                             [self.lineNum setFrame:CGRectMake(0, 52, 27, 615-52)];
+                             [self.lineNum2 setFrame:CGRectMake(490, 52, 27, 615-52)];
                              //z[temp setAlpha:0.0];
                              
                          }
                          completion:^(BOOL finished) {
-
+                             [self.buildImage setAlpha:0.0];
                              [self.loadingBar setFrame:CGRectMake(291, 26, 0, 14)];
                              [self.buildImage setImage:[UIImage imageNamed:@"notFinish"]];
                              [self.buildImage setAlpha:1.0];
                              [self.log setFrame:CGRectMake(0, 615, 1024, 153)];
-                             //commit
+                             [self.lineNum setFrame:CGRectMake(0, 52, 27, 615-52)];
+                             [self.lineNum2 setFrame:CGRectMake(490, 52, 27, 615-52)];
                              [self.errorNavImage setAlpha:1];
                          }];
     }

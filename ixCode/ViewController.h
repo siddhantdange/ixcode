@@ -13,10 +13,12 @@
     BOOL isMax;
     
 }
-@property (weak, nonatomic) IBOutlet UITextView *textEditor;
-@property (weak, nonatomic) IBOutlet UITextView *textEditorh;
+@property (strong, nonatomic) IBOutlet UITextView *textEditor;
+@property (strong, nonatomic) IBOutlet UITextView *textEditorh;
 @property (weak, nonatomic) UIView *simulator;
 
 -(void)logwithstring:(NSString *)nsstring;
+
+//27
 
 @end
