@@ -393,7 +393,7 @@
                              [self.buildImage setImage:[UIImage imageNamed:@"notFinish"]];
                              [self.buildImage setAlpha:1.0];
                              [self.log setFrame:CGRectMake(0, 615, 1024, 153)];
-
+                             //commit
                              [self.errorNavImage setAlpha:1];
                          }];
     }
