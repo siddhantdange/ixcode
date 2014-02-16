@@ -48,6 +48,7 @@
     if (sender.state == UIGestureRecognizerStateEnded) {
         [self.textEditorh setFrame:CGRectMake(0, 54, 511, 714)];
         [self.textEditor setFrame:CGRectMake(513, 54, 511, 714)];
+        [self.view endEditing:YES];
     }
 }
 
@@ -56,7 +57,7 @@
     [self.textEditor setFrame:CGRectMake(513, 54, 511, 714)];
     [self.buildImage setAlpha:0.0];
     [self.log setFrame:CGRectMake(0, 768, 1024, 153)];
-
+    [self.view endEditing:YES];
 }
 
 
@@ -306,6 +307,7 @@
 }
 
 - (IBAction)compileCode:(id)sender {
+        [self.view endEditing:YES];
     int errorline=[self errorLine:self.textEditor.text];
     
     if (errorline>self.errorLine) {
@@ -384,7 +386,7 @@
 }
 
 -(void)logwithstring:(NSString *)suchwow{
-    self.log.text = [self.log.text stringByAppendingString:suchwow];
+    self.log.text = [self.log.text stringByAppendingString:[NSString stringWithFormat:@"\n%@",suchwow]];
 }
 
 @end
