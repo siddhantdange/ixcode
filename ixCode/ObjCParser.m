@@ -10,67 +10,41 @@
 #import <objc/objc-runtime.h>
 
 @interface ObjCParser ()
+
+@property (nonatomic, strong) NSMutableDictionary *dispatchTable, *superStack;
+@property (nonatomic, copy) void (^loggerBlock)(NSString*);
+@property (nonatomic, strong) NSNumber *integer;
 @end
 
 @implementation ObjCParser
 
-- (void)viewDidLoad
-{
-	// Do any additional setup after loading the view, typically from a nib.
-    // Prepare the object
-    //UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(50,100,100,50)]; [button addTarget:self action:@selector(clicked) forControlEvents:UIControlEventTouchUpInside]; UIColor *color = [UIColor redColor]; [button setBackgroundColor:color]; [button setTitle:@"clickme!" forState:UIControlStateNormal]; [[self view] addSubview:button]; UIColor *orangeColor = [UIColor orangeColor]; [[self  view] setBackgroundColor:orangeColor];
+-(void)startWithMethods:(NSMutableDictionary*)dispatchTable andViewController:(UIViewController*)vc andLoggerBlock:(void(^)(NSString*))loggerBlock{
     
-    // FloatingTextView *textView = [[FloatingTextView alloc] initWithFrame:CGRectMake(50.0f, 100.0f, 250.0f  , 50.0f) andPlaceholder:@"click here!" withPointSize:15.0f];
-    // [self.view addSubview:textView];
-    
+    self.loggerBlock = loggerBlock;
+    self.superStack = @{@"self" : vc, @"super" : vc.superclass, @"nil" : [NSNull null]}.mutableCopy;
+    self.dispatchTable = @{
+                           @"clicked" : @{
+                                   @"type" : [self typeCodeFromMethodSignature:@"-(void)clicked"],
+                                   @"body" : @"{UIColor *color = [UIColor whiteColor]; [[self view] setBackgroundColor:color];}"
+                                   },
+                           @"addButton" : @{
+                                   @"type" : [self typeCodeFromMethodSignature:@"-(void)addButton"],
+                                   @"body" : @"{UIButton *newButton = [[UIButton alloc] initWithFrame:CGRectMake(200,100,300,300)]; UIColor *redColor = [UIColor redColor]; [newButton setBackgroundColor:redColor]; [newButton addTarget:self action:@selector(logLine) forControlEvents:UIControlEventTouchUpInside]; [[self view] addSubview:newButton];}"
+                                   },
+                           @"logLine" : @{
+                                   @"type" : [self typeCodeFromMethodSignature:@"-(void)logLine"],
+                                   @"body" : @"{[NSString *str = [[NSString alloc] initWithString:@\"hi\"]; [self printLog:str];}"
+                                   }
+                           }.mutableCopy;
+    self.dispatchTable = dispatchTable.copy;
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    
-    [self processMethodBody];
+-(void)startMethod:(NSString*)method{
+    [self processMethodBody:self.dispatchTable[method]];
 }
 
--(void)processStringSignature{
-    NSString *method = [self getMethodStr];
-    
-    NSString *signatureStr = [method substringToIndex:[self indexOf:@"{" inString:method]];// [self    substring:method from:[self indexOf:@")" inString:method]+1 to:];
-    
-    //parameters
-    NSString *typeCode = [self typeCodeFromMethodSignature:signatureStr];
-    signatureStr = [signatureStr substringFromIndex:[self indexOf:@")" inString:signatureStr]+1];
-    
-    //selector
-    NSString *selectorStr = [self selectorStringFromFullSignature:signatureStr];
-    SEL methodSel = NSSelectorFromString (selectorStr);
-    
-    NSLog(@"selector: %@,\ntype code: %@", NSStringFromSelector(methodSel), typeCode);
-    
-    //add method to self
-    [self dynamicDispatchTable:methodSel];
-}
-
--(void)dynamicDispatchTable:(SEL)selector{
-    
-    //create dispatch table if it isnt initialized
-    static NSMutableDictionary *dispatchTable;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        dispatchTable = [NSMutableDictionary new];
-    });
-    
-    if(![dispatchTable objectForKey:NSStringFromSelector(selector)]) {
-        void (^block)(void) = ^(void){
-            
-        };
-        
-        [dispatchTable setObject:block forKey:NSStringFromSelector(selector)];
-    } else{
-        [self performSelectorOnMainThread:selector withObject:nil waitUntilDone:YES];
-    }
-}
-
--(NSString*)getMethodStr{
-    return @"-(void)printMyString:(NSString*)string andInt:(int)integer{}";
+-(void)printLog:(NSString*)str{
+    self.loggerBlock(str);
 }
 
 -(NSString*)getMethodBody{
@@ -78,11 +52,10 @@
     
     
     //return @"{NSMutableString *string = [[NSMutableString alloc] initWithString:@\"yee\\shere!\"]; [string appendString:@\"\\slegoo!\"}";
-    return @"{ UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(50,100,100,50)]; [button addTarget:self action:@selector(clicked) forControlEvents:UIControlEventTouchUpInside]; UIColor *color = [UIColor redColor]; [button setBackgroundColor:color]; [button setTitle:@\"click\\sme!\" forState:UIControlStateNormal]; [[self view] addSubview:button]; UIColor *orangeColor = [UIColor orangeColor]; [[self view] setBackgroundColor:orangeColor];}";
+    return @"{ UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(50,100,100,50)]; [button addTarget:self action:@selector(addButton) forControlEvents:UIControlEventTouchUpInside]; UIColor *color = [UIColor redColor]; [button setBackgroundColor:color]; [button setTitle:@\"click\\sme!\" forState:UIControlStateNormal]; [[self view] addSubview:button]; UIColor *orangeColor = [UIColor orangeColor]; [[self view] setBackgroundColor:orangeColor];}";
 }
 
--(void)processMethodBody{
-    NSString *methodBody = [self getMethodBody];
+-(void)processMethodBody:(NSString*)methodBody{
     methodBody = [methodBody substringFromIndex:[methodBody rangeOfString:@"{"].location + 1];
     //[UIButton alloc] init];
     
@@ -99,35 +72,28 @@
         }
     }
     
-    // NSString *string = [[UIColor whiteColor] accessibilityLabel];
-    NSMutableDictionary *myDispatchTable = @{@"self" : self, @"nil" : [NSNull null], @"mySel" : @"clicked"}.mutableCopy;
-    
     for (NSString *line in bodyLines) {
         if([line rangeOfString:@"="].location != NSNotFound){
             NSString *rightSide = [line substringFromIndex:[line rangeOfString:@"="].location + 1];
             NSString *leftSide = [line substringToIndex:[line rangeOfString:@"="].location];
             
-            id value = [self parseSingularMethod:rightSide withDispatchTable:myDispatchTable];
+            id value = [self parseSingularMethod:rightSide withStack:self.superStack];
             NSString *classStr = [leftSide substringToIndex:[leftSide rangeOfString:@" "].location];
             classStr = [classStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             NSString *objName = [leftSide substringFromIndex:[leftSide rangeOfString:@"*"].location + 1];
             objName = [objName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             id obj = value;// [NSClassFromString(classStr) init];
-            [myDispatchTable setObject:obj forKey:objName];
+            [self.superStack setObject:obj forKey:objName];
         } else{
-            [self parseSingularMethod:line withDispatchTable:myDispatchTable];
+            [self parseSingularMethod:line withStack:self.superStack];
         }
     }
     
     int breakpointHere = 3;
-    NSLog(@"table: %@", myDispatchTable);
+    NSLog(@"table: %@", self.superStack);
 }
 
--(void)clicked{
-    NSLog(@"clicked!");
-}
-
--(id)parseSingularMethod:(NSString*)method withDispatchTable:(NSDictionary*)dispatchTable{
+-(id)parseSingularMethod:(NSString*)method withStack:(NSDictionary*)stack{
     NSString *beginning = [method substringToIndex:[method rangeOfString:@"]" options:NSBackwardsSearch].location];
     
     NSString *unwrappedMethod = [beginning substringFromIndex:[beginning rangeOfString:@"["].location + 1];
@@ -154,8 +120,8 @@
             NSValue* argument = nil;
             NSString *argumentStr = [rightSide substringWithRange:[arr[i] range]];
             argumentStr = [[argumentStr substringFromIndex:1] stringByTrimmingCharactersInSet:[NSCharacterSet  whitespaceAndNewlineCharacterSet]];
-            if(dispatchTable[argumentStr]){
-                argument = [NSValue valueWithPointer:(__bridge void *)(dispatchTable[argumentStr])];
+            if(stack[argumentStr]){
+                argument = [NSValue valueWithPointer:(__bridge void *)(stack[argumentStr])];
             } else if(NSClassFromString(argumentStr)){
                 argument = [NSValue valueWithPointer:(__bridge void *)(NSClassFromString(argumentStr))];
             } else if([self eval:argumentStr toCaste:&argument] != nil){
@@ -177,11 +143,11 @@
     
     id obj;
     if([leftSide rangeOfString:@"]"].location != NSNotFound){
-        obj = [self parseSingularMethod:leftSide withDispatchTable:dispatchTable];
+        obj = [self parseSingularMethod:leftSide withStack:stack];
     }
     
-    if(dispatchTable[leftSide]){
-        obj = dispatchTable[leftSide];
+    if(stack[leftSide]){
+        obj = stack[leftSide];
     }
     
     if(NSClassFromString(leftSide)){
@@ -221,6 +187,8 @@
         } else{
             returner = [obj performSelector:selector withObject:nil withObject:nil];
         }
+    } else if(self.dispatchTable[NSStringFromSelector(selector)]){
+        [self processMethodBody:self.dispatchTable[NSStringFromSelector(selector)]];
     }
     
     return returner;
@@ -281,6 +249,10 @@
     return casted;
 }
 
+//-(void)clicked{
+//    NSLog(@"clicked!");
+//}
+
 -(NSString*)selectorStringFromFullSignature:(NSString*)signature{
     NSMutableString *sigStr = signature.mutableCopy;
     
@@ -308,7 +280,7 @@
     while([self indexOf:@"(" inString:parameterSection] != -1){
         
         //capture parameter type
-        NSString *parameterType = [self substring:parameterSection from:[self indexOf:@"(" inString:parameterSection]+1 to: [self indexOf:@")" inString:parameterSection]];
+        NSString *parameterType = [self substring:parameterSection from:[self indexOf:@"(" inString:parameterSection]+1 to: [self indexOf:@")"  inString:parameterSection]];
         
         //strip to bare class
         BOOL isObject = NO;
@@ -334,7 +306,12 @@
         parameterSection = [parameterSection substringFromIndex:[self indexOf:@")" inString: parameterSection] + 1].mutableCopy;
     }
     
-    return typeCode;
+    int max = typeCode.length;
+    NSString *end = @"";
+    if(max >= 3){
+        end = [typeCode substringFromIndex:1];
+    }
+    return [NSString stringWithFormat:@"%c@:%@", [typeCode characterAtIndex:0], end];
 }
 
 -(NSDictionary*)primitiveTypes{
@@ -361,6 +338,41 @@
     return [middle substringToIndex:[self indexOf:charStr inString:middle]];
 }
 
+-(BOOL)respondsToSelector:(SEL)aSelector{
+    if([super respondsToSelector:aSelector] || self.dispatchTable[NSStringFromSelector(aSelector)]){
+        return YES;
+    }
+    
+    return NO;
+}
+
+-(id)forwardingTargetForSelector:(SEL)aSelector{
+    
+    if(self.dispatchTable[NSStringFromSelector(aSelector)]){
+        
+        [self processMethodBody:self.dispatchTable[NSStringFromSelector(aSelector)][@"body"]];
+        [self methodIMPCopy:self.class forOrigSel:aSelector andAltSel:@selector(blankMethod)];
+    }
+    
+    return self;
+}
+
+-(void)forwardInvocation:(NSInvocation *)anInvocation{
+    if([self respondsToSelector:anInvocation.selector]){
+        [self performSelector:anInvocation.selector withObject:nil];
+    } else if([super respondsToSelector:anInvocation.selector]){
+        [super performSelector:anInvocation.selector withObject:nil];
+    }
+}
+
+-(void)blankMethod{
+}
+
+-(void)methodIMPCopy:(Class) aClass forOrigSel:(SEL)orig_sel andAltSel:(SEL)alt_sel{
+    
+    Method swizzled = class_getInstanceMethod(aClass, alt_sel);
+    class_replaceMethod(aClass, orig_sel, method_getImplementation(swizzled), ((NSString*)self.dispatchTable[NSStringFromSelector(orig_sel)][@"type"]).UTF8String);
+}
 
 - (void)didReceiveMemoryWarning
 {
