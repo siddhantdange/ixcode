@@ -38,6 +38,7 @@
 		5ECD8C1818AFF00200DA0CFD /* didFinish.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ECD8C1418AFF00200DA0CFD /* didFinish.png */; };
 		5ECD8C1918AFF00200DA0CFD /* notFinish.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ECD8C1518AFF00200DA0CFD /* notFinish.png */; };
 		5ECD8C1A18AFF00200DA0CFD /* notFinish@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ECD8C1618AFF00200DA0CFD /* notFinish@2x.png */; };
+		5ECD8C1C18B05B4700DA0CFD /* mailer.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ECD8C1B18B05B4700DA0CFD /* mailer.png */; };
 		5EFB406A18AF08C5006DA47F /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EFB406918AF08C5006DA47F /* ViewController.xib */; };
 		E44FE4EB18AFB5FF0025E6CC /* NSStack.m in Sources */ = {isa = PBXBuildFile; fileRef = E44FE4EA18AFB5FF0025E6CC /* NSStack.m */; };
 		E44FE4EC18AFB5FF0025E6CC /* NSStack.m in Sources */ = {isa = PBXBuildFile; fileRef = E44FE4EA18AFB5FF0025E6CC /* NSStack.m */; };
@@ -92,6 +93,7 @@
 		5ECD8C1418AFF00200DA0CFD /* didFinish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = didFinish.png; sourceTree = "<group>"; };
 		5ECD8C1518AFF00200DA0CFD /* notFinish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notFinish.png; sourceTree = "<group>"; };
 		5ECD8C1618AFF00200DA0CFD /* notFinish@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notFinish@2x.png"; sourceTree = "<group>"; };
+		5ECD8C1B18B05B4700DA0CFD /* mailer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mailer.png; sourceTree = "<group>"; };
 		5EFB406918AF08C5006DA47F /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ViewController.xib; path = ../ViewController.xib; sourceTree = "<group>"; };
 		E44FE4E918AFB5FF0025E6CC /* NSStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStack.h; sourceTree = "<group>"; };
 		E44FE4EA18AFB5FF0025E6CC /* NSStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStack.m; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				5EB7FF5318AFAA59000325DA /* succeeded.png */,
 				5ECD8C0118AFB2C900DA0CFD /* top.png */,
 				5E2DCD2F18AF532F00AA47F7 /* 5r.png */,
+				5ECD8C1B18B05B4700DA0CFD /* mailer.png */,
 				2580F70A18AF058A0042F072 /* ixCode-Info.plist */,
 				2580F70B18AF058A0042F072 /* InfoPlist.strings */,
 				2580F70E18AF058A0042F072 /* main.m */,
@@ -297,6 +300,7 @@
 				5ECD8C1218AFE99B00DA0CFD /* bootScreen.png in Resources */,
 				5ECD8C1718AFF00200DA0CFD /* didFinish@2x.png in Resources */,
 				5ECD8C1818AFF00200DA0CFD /* didFinish.png in Resources */,
+				5ECD8C1C18B05B4700DA0CFD /* mailer.png in Resources */,
 				5ECD8C0818AFB51A00DA0CFD /* loading.png in Resources */,
 				5E2DCD3218AF545F00AA47F7 /* asd.png in Resources */,
 				5ECD8C0418AFB35400DA0CFD /* stop.png in Resources */,

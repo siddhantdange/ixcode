@@ -7,17 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
-@interface ViewController : UIViewController{
+@interface ViewController : UIViewController<MFMailComposeViewControllerDelegate>{
     BOOL isMax;
     
 }
 @property (weak, nonatomic) IBOutlet UITextView *textEditor;
 @property (weak, nonatomic) IBOutlet UITextView *textEditorh;
+@property (weak, nonatomic) UIView *simulator;
 
+-(void)logwithstring:(NSString *)nsstring;
 
-//.m 357 54 385 714
-//.h 0 54 355 714
-
-//385 + 57
 @end
