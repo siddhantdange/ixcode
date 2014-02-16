@@ -39,7 +39,8 @@
     [self addChildViewController:simulatorVC];
     [simulatorVC.view setFrame:CGRectMake(756, 126, 239, 398)];
     [self.view addSubview:simulatorVC.view];
-    [simulatorVC.view setBackgroundColor:[UIColor yellowColor]];
+   // [simulatorVC.view setBackgroundColor:[UIColor yellowColor]];
+    [[self view]setBackgroundColor:[UIColor redColor]];
     UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Name of Project" message:@"Please enter the name" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
     av.alertViewStyle = UIAlertViewStylePlainTextInput;
     [av textFieldAtIndex:0].delegate = self;
@@ -428,13 +429,6 @@
     
     if ([self lineRequiresSemicolon:self.textEditor.text]&&[self isValid:self.textEditor.text]&&errorline==-1) {
         
-        self.parser = [[ObjCParser alloc]init];
-        simulatorVC.parser = self.parser;
-        NSString *totalBody = self.textEditor.text;
-        [self.parser initParserWithDispatchTable:[self parseClass:totalBody].mutableCopy  andViewController:simulatorVC andLoggerBlock:^(NSString *log){   
-            [self logwithstring:log];
-        }];
-        [self.parser startMethod:@"viewDidLoad"];
         [UIView animateWithDuration:1.5f
                          animations:^{
                              // temp.alpha=0.0f;
@@ -442,7 +436,13 @@
                              self.progressBar.progress = 0.0;
                              [self performSelectorOnMainThread:@selector(makeMyProgressBarMoving) withObject:nil waitUntilDone:NO];                             //z[temp setAlpha:0.0];
                              
-                             
+                             self.parser = [[ObjCParser alloc]init];
+                             simulatorVC.parser = self.parser;
+                             NSString *totalBody = self.textEditor.text;
+                             [self.parser initParserWithDispatchTable:[self parseClass:totalBody].mutableCopy  andViewController:simulatorVC andLoggerBlock:^(NSString *log){
+                                 [self logwithstring:log];
+                             }];
+                             [self.parser startMethod:@"viewDidLoad"];
                          }
                          completion:^(BOOL finished) {
                              [self.loadingBar setFrame:CGRectMake(291, 26, 0, 14)];

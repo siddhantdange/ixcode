@@ -23,8 +23,8 @@
 		5E2DCD2E18AF50BE00AA47F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E2DCD2D18AF50BE00AA47F7 /* Main.storyboard */; };
 		5E2DCD3018AF532F00AA47F7 /* 5r.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E2DCD2F18AF532F00AA47F7 /* 5r.png */; };
 		5E2DCD3218AF545F00AA47F7 /* asd.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E2DCD3118AF545F00AA47F7 /* asd.png */; };
-		5E3521BF18B0DF87007CE3FF /* ObjCParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E3521BE18B0DF87007CE3FF /* ObjCParser.m */; };
-		5E3521C218B0E0E1007CE3FF /* SImulatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E3521C118B0E0E1007CE3FF /* SImulatorViewController.m */; };
+		5E3521BF18B0DF87007CE3FF /* ObjCParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E3521BE18B0DF87007CE3FF /* ObjCParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5E3521C218B0E0E1007CE3FF /* SImulatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E3521C118B0E0E1007CE3FF /* SImulatorViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5E4907A518B0A6AD0013A7C6 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E4907A418B0A6AD0013A7C6 /* icon.png */; };
 		5E4907A718B0A6B10013A7C6 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E4907A618B0A6B10013A7C6 /* icon@2x.png */; };
 		5EB7FF5418AFAA59000325DA /* succeeded.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB7FF5318AFAA59000325DA /* succeeded.png */; };
