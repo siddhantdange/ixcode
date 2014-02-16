@@ -372,14 +372,14 @@
                              [self.log setFrame:CGRectMake(0, 768, 1024, 153)];
                              //z[temp setAlpha:0.0];
                              
-                             
                          }
                          completion:^(BOOL finished) {
 
                              [self.loadingBar setFrame:CGRectMake(291, 26, 0, 14)];
                              [self.buildImage setImage:[UIImage imageNamed:@"notFinish"]];
                              [self.buildImage setAlpha:1.0];
-                             
+                             [self.log setFrame:CGRectMake(0, 615, 1024, 153)];
+
                              [self.errorNavImage setAlpha:1];
                          }];
     }
